@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react'
-
+import React, { PureComponent, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import './HistoryMatches.sass'
 
 class HistoryMatches extends PureComponent {
-  render() {
+  static propTypes = {
+    matches: PropTypes.array,
+  }
 
-    const history = [ 1, 2, 3, 4, 5 ]
-    console.log('HistoryMatches: ', history)
-    const listHistory = history.map((match) =>
-      <li key={match}>
-        <button style={{width:100, height:30}}>{match}</button>
+  render() {
+    const listHistory = this.props.matches.map((match, index) =>
+      <li key={index}>
+        <button style={{width:100, height:30}}>{match.date}</button>
       </li>
     )
-    console.log('listHistory: ', listHistory)
 
     return(
       <div>
@@ -24,4 +24,8 @@ class HistoryMatches extends PureComponent {
   }
 }
 
-export default HistoryMatches
+const mapStateToProps = ({ matches }) => ({
+  matches
+})
+
+export default connect(mapStateToProps)(HistoryMatches)

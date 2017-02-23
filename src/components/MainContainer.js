@@ -1,10 +1,12 @@
-import React, { PureComponent }from 'react'
+import React, { PureComponent, PropTypes }from 'react'
 
 import DailyMatch from './DailyMatch'
 import HistoryMatches from './HistoryMatches'
 import './MainContainer.sass'
 
 class MainContainer extends PureComponent {
+
+
   render() {
     return(
       <div className="main-container">
