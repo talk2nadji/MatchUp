@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 
+import './HistoryMatches.sass'
+
 class HistoryMatches extends PureComponent {
   render() {
 

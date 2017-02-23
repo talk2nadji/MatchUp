@@ -1,6 +1,7 @@
 import React from 'react'
 
 import defaultAvatar from '../images/default-avatar-250x250.png'
+import './Avatar.sass'
 
 export default class Avatar extends React.PureComponent {
   render() {
@@ -10,7 +11,7 @@ export default class Avatar extends React.PureComponent {
           src={defaultAvatar}
           alt={this.props.name}
         />
-        <p>NAME</p>
+        <span className="name-center"><p>NAME</p></span>
       </div>
     )
   }
