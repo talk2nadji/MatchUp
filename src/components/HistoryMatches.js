@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import './HistoryMatches.sass'
+import MatchGenerator from './MatchGenerator'
 
 class HistoryMatches extends PureComponent {
   static propTypes = {
@@ -10,7 +11,7 @@ class HistoryMatches extends PureComponent {
   render() {
     const listHistory = this.props.matches.map((match, index) =>
       <li key={index}>
-        <button style={{width:100, height:30}}>{match.date}</button>
+        <button>{match.date}</button>
       </li>
     )
 
@@ -19,6 +20,8 @@ class HistoryMatches extends PureComponent {
         <ul>
           {listHistory}
         </ul>
+        <br></br>
+        <MatchGenerator />
       </div>
     )
   }
