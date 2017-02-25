@@ -2,10 +2,16 @@ import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import './HistoryMatches.sass'
 import MatchGenerator from './MatchGenerator'
+import fetchMatches from '../actions/fetch-matches'
 
 class HistoryMatches extends PureComponent {
   static propTypes = {
     matches: PropTypes.array,
+    fetchMatches: PropTypes.func
+  }
+
+  componentDidMount() {
+    this.props.fetchMatches()
   }
 
   render() {
@@ -31,4 +37,4 @@ const mapStateToProps = ({ matches }) => ({
   matches
 })
 
-export default connect(mapStateToProps)(HistoryMatches)
+export default connect(mapStateToProps, { fetchMatches })(HistoryMatches)

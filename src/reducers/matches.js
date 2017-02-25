@@ -1,4 +1,5 @@
 import { CREATE_MATCH } from '../actions/create-match'
+import { FETCH_MATCHES } from '../actions/fetch-matches'
 
 const matches = [
   {
@@ -20,7 +21,7 @@ const matches = [
 
 export default (state = matches, { type, payload } = {}) => {
   switch(type) {
-    case 'FETCH_MATCHES':
+    case FETCH_MATCHES:
       return [].concat(payload)
     case CREATE_MATCH:
       return [Object.assign({}, payload)].concat(state)

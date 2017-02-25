@@ -1,9 +1,14 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import createMatch from '../actions/create-match'
 import './MatchGenerator.sass'
 
 class MatchGenerator extends PureComponent {
+  static propTypes = {
+    //TODO validations
+
+  }
+
   constructor(props) {
     super()
     const { date, user1, user2 } = props
@@ -41,7 +46,7 @@ class MatchGenerator extends PureComponent {
 
     const match = { date, user1, user2 }
 
-    //TODO this.props.createMatch(match)
+    this.props.createMatch(match)
     console.log(match)
   }
 

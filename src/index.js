@@ -1,12 +1,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import store from './store'
+import { Router, Route, IndexRoute } from 'react-router'
+
+import store, { history } from './store'
 import App from './App'
+import MainContainer from './components/MainContainer'
+import SignUp from './components/SignUp'
+import SignIn from './components/SignIn'
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router history={history}>
+      <Route path="/" component={App}>
+        <IndexRoute component={MainContainer} />
+        <Route path="/sign-up" component={SignUp} />
+        <Route path="/sign-in" component={SignIn} />
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('root')
 )
