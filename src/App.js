@@ -2,7 +2,7 @@ import React from 'react'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import muiTheme from './assets/styles/theme'
-
+import Navigation from './components/Navigation'
 import './App.sass'
 
 class App extends React.Component {
@@ -13,12 +13,15 @@ class App extends React.Component {
   getChildContext() {
     return { muiTheme }
   }
-  
+
   render() {
     return (
-      <div>
-        {this.props.children}
-      </div>
+      <MuiThemeProvider muiTheme={ muiTheme }>
+        <div className="app">
+          <Navigation />
+            {this.props.children}
+          </div>
+      </MuiThemeProvider>
     )
   }
 }
