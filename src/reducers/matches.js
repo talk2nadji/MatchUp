@@ -19,14 +19,14 @@ const matches = [
   },
 ]
 
-export default (state = matches, { type, payload } = {}) => {
+export default (state = [], { type, payload } = {}) => {
   switch(type) {
     case FETCH_MATCHES:
       return [].concat(payload)
 
     case CREATE_MATCH:
       return [Object.assign({}, payload)].concat(state)
-      
+
     default:
       return state
   }

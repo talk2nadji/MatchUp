@@ -1,3 +1,5 @@
+import { FETCH_USERS } from '../actions/fetch-users'
+
 const users = [
   {
     _id: 'abc123',
@@ -13,6 +15,12 @@ const users = [
   },
 ]
 
-export default (state = users, { type, payload } = {}) => {
-  return state
+export default (state = [], { type, payload } = {}) => {
+  switch(type) {
+    case FETCH_USERS:
+      return [].concat(payload)
+      
+    default:
+      return state
+  }
 }

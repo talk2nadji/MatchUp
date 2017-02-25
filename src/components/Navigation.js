@@ -29,7 +29,7 @@ export class Navigation extends PureComponent {
     const { signedIn } = this.props
     return (
       <AppBar
-        title="Matches"
+        title="MatchUp"
         iconElementLeft={<IconButton onClick={this.goHome}><Face /></IconButton>}
         iconElementRight={signedIn ?
           <FlatButton label="Sign out" onClick={this.signOut.bind(this)} /> :
