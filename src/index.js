@@ -2,12 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { Router, Route, IndexRoute } from 'react-router'
-
 import store, { history } from './store'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 import App from './App'
 import MainContainer from './components/MainContainer'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
+
+injectTapEventPlugin()
 
 ReactDOM.render(
   <Provider store={store}>

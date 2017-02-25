@@ -1,20 +1,24 @@
 import API from '../middleware/api'
+import { history } from '../store'
 import loadError from './error'
 import loadSuccess from './success'
 import loading from './loading'
-export const USER_SIGNED_UP = 'USER_SIGNED_UP'
+export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 
 const api = new API()
-const users = api.service('users')
 
 export default (user) => {
   return (dispatch) => {
     dispatch(loading(true))
 
-    users.create(user)
+    api.authenticate(user)
     .then((response) => {
       dispatch(loadSuccess())
-      dispatch({ type: USER_SIGNED_UP })
+      dispatch({
+        type: USER_SIGNED_IN,
+        payload: response.data
+      })
+      history.push('/')
     })
     .catch((error) => {
       dispatch(loadError(error))
