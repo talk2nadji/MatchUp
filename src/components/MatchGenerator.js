@@ -12,6 +12,7 @@ class MatchGenerator extends PureComponent {
   constructor() {
     super()
     this.state = {
+      date: new Date(),
       user1: '',
       user2: '',
     }
@@ -21,46 +22,58 @@ class MatchGenerator extends PureComponent {
     this.props.fetchUsers()
   }
 
-
-
-  //TODO set to user1
-  setUser1() {
-
+  setUser1(user) {
+    console.log('SET_STATE: ', user)
+    this.setState({ user1: user.name })
   }
 
-  setUser2() {
-
+  setUser2(user) {
+    console.log('SET_STATE: ', user)
+    this.setState({ user2: user.name })
   }
 
   //TODO pick random partner > bonus not same
   findPartner() {
-    return
+    console.log('Clicked for random partner (TODO)')
   }
 
   generateMatch() {
-
-    const match = { date, user1, user2 }
+    const { date, user1, user2 } = this.state
+    const todaysDate = date.toLocaleDateString()
+    console.log('toLocaleDateString: ', todaysDate)
+    const match = { todaysDate, user1, user2 }
 
     this.props.createMatch(match)
-    console.log(match)
   }
 
   render() {
 
-    const allUsers = this.props.users.map((user) =>
-      <p key={user._id} onClick={this.setUser1}>{user.name}</p>
+    const { users } = this.props
+    const listUser1 = users.map((user) =>
+      <li key={user._id} onClick={this.setUser1.bind(this, user)}>{user.name}</li>
+    )
+    const listUser2 = users.map((user) =>
+      <li key={user._id} onClick={this.setUser2.bind(this, user)}>{user.name}</li>
     )
 
     return(
       <div>
         <div>
-          User ONE = <p>{}</p>
-
+          <p>Chose first user: </p>
+          <ul>
+            {listUser1}
+          </ul>
+          <button onClick={() => console.log(this.state.user1)}>Check State User1</button>
         </div>
         <div>
-          <p>List of all users</p>
-          {allUsers}
+          <p>Chose second user: </p>
+          <ul>
+            {listUser2}
+          </ul>
+          <button onClick={() => console.log(this.state.user2)}>Check State User2</button>
+          <button onClick={() => console.log(this.state.date.toLocaleDateString())}>Check Todays Date</button>
         </div>
+
         <button onClick={this.findPartner.bind(this)}>Find Partner</button>
         <button onClick={this.generateMatch.bind(this)}>GENERATE MATCH</button>
       </div>
