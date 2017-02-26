@@ -8,6 +8,7 @@ const matches = api.service('matches')
 export default () => {
   return (dispatch) => {
     console.log('Fetching matches...')
+    //TODO authenticate currentUser
     matches.find()
       .then((result) => {
         console.log('Results are in!', result)

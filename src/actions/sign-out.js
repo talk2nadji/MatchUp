@@ -9,6 +9,6 @@ export default () => {
   return (dispatch) => {
     api.signOut()
     dispatch({ type: USER_SIGNED_OUT })
-    history.push('/')
+    history.push('/sign-in')
   }
 }

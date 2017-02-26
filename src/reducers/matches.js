@@ -25,7 +25,8 @@ export default (state = [], { type, payload } = {}) => {
       return [].concat(payload)
 
     case CREATE_MATCH:
-      return [Object.assign({}, payload)].concat(state)
+      const newMatch = Object.assign({}, payload)
+      return [newMatch].concat(state)
 
     default:
       return state

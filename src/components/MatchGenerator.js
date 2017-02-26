@@ -1,48 +1,43 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import fetchUsers from '../actions/fetch-users'
 import createMatch from '../actions/create-match'
 import './MatchGenerator.sass'
 
 class MatchGenerator extends PureComponent {
   static propTypes = {
     //TODO validations
-
   }
 
-  constructor(props) {
+  constructor() {
     super()
-    const { date, user1, user2 } = props
     this.state = {
-      date: '',
-      user1: 'Richard Nadji',
-      user2: 'Superman'
+      user1: '',
+      user2: '',
     }
   }
 
-  setDate() {
-    this.setState({
-      date: new Date().toLocaleDateString()
-    })
-    console.log('date: ', this.state.date)
+  componentDidMount() {
+    this.props.fetchUsers()
   }
 
-  //TODO set to current user
+
+
+  //TODO set to user1
   setUser1() {
-    this.setState({
-      user1: 'Richard Nadji'
-    })
+
+  }
+
+  setUser2() {
+
   }
 
   //TODO pick random partner > bonus not same
   findPartner() {
-    this.setState({
-      user2: 'Lois Lane'
-    })
-    console.log('partner:', this.state.user2)
+    return
   }
 
   generateMatch() {
-    const { date, user1, user2 } = this.state
 
     const match = { date, user1, user2 }
 
@@ -51,14 +46,30 @@ class MatchGenerator extends PureComponent {
   }
 
   render() {
+
+    const allUsers = this.props.users.map((user) =>
+      <p key={user._id} onClick={this.setUser1}>{user.name}</p>
+    )
+
     return(
       <div>
+        <div>
+          User ONE = <p>{}</p>
+
+        </div>
+        <div>
+          <p>List of all users</p>
+          {allUsers}
+        </div>
         <button onClick={this.findPartner.bind(this)}>Find Partner</button>
-        <button onClick={this.setDate.bind(this)}>Set Todays Date</button>
         <button onClick={this.generateMatch.bind(this)}>GENERATE MATCH</button>
       </div>
     )
   }
 }
 
-export default connect(null, { createMatch })(MatchGenerator)
+const mapStateToProps = ({ users }) => ({
+  users
+})
+
+export default connect(mapStateToProps, { fetchUsers, createMatch })(MatchGenerator)

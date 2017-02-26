@@ -2,6 +2,7 @@ import API from '../middleware/api'
 import loadError from './error'
 import loadSuccess from './success'
 import loading from './loading'
+
 export const USER_SIGNED_UP = 'USER_SIGNED_UP'
 
 const api = new API()

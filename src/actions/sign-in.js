@@ -3,6 +3,7 @@ import { history } from '../store'
 import loadError from './error'
 import loadSuccess from './success'
 import loading from './loading'
+
 export const USER_SIGNED_IN = 'USER_SIGNED_IN'
 
 const api = new API()
