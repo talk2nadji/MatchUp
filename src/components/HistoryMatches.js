@@ -1,24 +1,33 @@
 import React, { PureComponent, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { history } from '../store'
 import './HistoryMatches.sass'
 import MatchGenerator from './MatchGenerator'
 import fetchMatches from '../actions/fetch-matches'
-import fetchUsers from '../actions/fetch-users'
 
 class HistoryMatches extends PureComponent {
   static propTypes = {
     matches: PropTypes.array,
     fetchMatches: PropTypes.func,
-    fetchUsers: PropTypes.func
+  }
+
+  constructor(props) {
+    super()
+    this.state = { date: new Date() }
   }
 
   componentDidMount() {
+    //TODO fetch matches only of the currentUser -> hooks
     this.props.fetchMatches()
-    this.props.fetchUsers()
+  }
+
+  toAdminPage() {
+    history.push('/admin')
   }
 
   render() {
-    const listHistory = this.props.matches.map((match, index) =>
+    const { matches, currentUser } = this.props
+    const listHistory = matches.map((match, index) =>
       <li key={index}>
         <button>{match.date}</button>
       </li>
@@ -26,19 +35,21 @@ class HistoryMatches extends PureComponent {
 
     return(
       <div>
+        { currentUser.isAdmin &&
+          <p>Because you are a admin >> <button onClick={this.toAdminPage}>ADMIN PAGE</button></p>
+        }
+        <h3>History List | Todays date: {this.state.date.toLocaleDateString()}</h3>
         <ul>
           {listHistory}
         </ul>
-        <br></br>
-        <MatchGenerator />
       </div>
     )
   }
 }
 
-const mapStateToProps = ({ matches, users }) => ({
+const mapStateToProps = ({ matches, currentUser }) => ({
   matches,
-  users
+  currentUser
 })
 
-export default connect(mapStateToProps, { fetchMatches, fetchUsers })(HistoryMatches)
+export default connect(mapStateToProps, { fetchMatches })(HistoryMatches)

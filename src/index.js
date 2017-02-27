@@ -8,6 +8,7 @@ import App from './App'
 import MainContainer from './components/MainContainer'
 import SignUp from './components/SignUp'
 import SignIn from './components/SignIn'
+import Admin from './components/Admin'
 
 injectTapEventPlugin()
 
@@ -18,6 +19,7 @@ ReactDOM.render(
         <IndexRoute component={MainContainer} />
         <Route path="/sign-up" component={SignUp} />
         <Route path="/sign-in" component={SignIn} />
+        <Route path="/admin" component={Admin} />
       </Route>
     </Router>
   </Provider>,

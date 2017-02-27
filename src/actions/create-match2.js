@@ -2,22 +2,23 @@ import API from '../middleware/api'
 import loadError from './error'
 import loadSuccess from './success'
 import loading from './loading'
-import { history } from '../store'
 
-export const USER_SIGNED_UP = 'USER_SIGNED_UP'
+export const CREATE_MATCH = 'CREATE_MATCH'
 
 const api = new API()
-const users = api.service('users')
+const matches = api.service('matches')
 
-export default (user) => {
+export default (newMatch) => {
   return (dispatch) => {
     dispatch(loading(true))
-
-    users.create(user)
+    console.log('NEW MATCH', newMatch)
+    //TODO authenticate currentUser to be admin
+    api.authenticate()
+    matches.create(newMatch)
     .then((response) => {
+      console.log('Match created..', response)
       dispatch(loadSuccess())
-      dispatch({ type: USER_SIGNED_UP })
-      history.push('/sign-in')
+      dispatch({ type: CREATE_MATCH })
     })
     .catch((error) => {
       dispatch(loadError(error))

@@ -8,13 +8,14 @@ export const CREATE_MATCH = 'CREATE_MATCH'
 const api = new API()
 const matches = api.service('matches')
 
-export default (newMatch) => {
+export default (match) => {
   return (dispatch) => {
     dispatch(loading(true))
-    console.log('NEW MATCH', newMatch)
-    //TODO authenticate currentUser to be admin
-    matches.create(newMatch)
+    console.log('STEP 1')
+    // api.authenticate()
+    matches.create(match)
     .then((response) => {
+      console.log('STEP 3: ', response)
       dispatch(loadSuccess())
       dispatch({ type: CREATE_MATCH })
     })

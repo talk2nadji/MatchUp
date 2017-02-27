@@ -8,7 +8,7 @@ class DailyMatch extends PureComponent {
   render() {
     return(
       <div className="daily-match">
-        <Avatar name="Richard"/>
+        <Avatar name={this.props.name}/>
         <img className="image-hands" src={matchImage} />
         <Avatar name="Default"/>
       </div>

@@ -11,7 +11,7 @@ export default class Avatar extends React.PureComponent {
           src={defaultAvatar}
           alt={this.props.name}
         />
-        <span className="name-center"><p>NAME</p></span>
+        <span className="name-center"><p>{this.props.name}</p></span>
       </div>
     )
   }

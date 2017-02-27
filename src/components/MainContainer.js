@@ -1,4 +1,5 @@
 import React, { PureComponent, PropTypes }from 'react'
+import { connect } from 'react-redux'
 
 import DailyMatch from './DailyMatch'
 import HistoryMatches from './HistoryMatches'
@@ -11,7 +12,7 @@ class MainContainer extends PureComponent {
     return(
       <div className="main-container">
         <div className="center">
-          <DailyMatch />
+          <DailyMatch name={this.props.currentUser.name}/>
         </div>
         <div className="center">
           <HistoryMatches />
@@ -21,4 +22,6 @@ class MainContainer extends PureComponent {
   }
 }
 
-export default MainContainer
+const mapStateToProps = ({ currentUser }) => ({ currentUser })
+
+export default connect(mapStateToProps)(MainContainer)
